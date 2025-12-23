@@ -8,12 +8,7 @@ public class NPCBrain : MonoBehaviour, ILocomotionInput
 
     public Vector2 Move => _move;
 
-    public Quaternion? TargetRotation => _targetRotation;
-
-    public bool Sprint => false;
-
     private Vector2 _move;
-    private Quaternion? _targetRotation;
 
     private void Update()
     {
@@ -38,9 +33,8 @@ public class NPCBrain : MonoBehaviour, ILocomotionInput
         StatesQueue.Clear();
     }
 
-    public void CreateLocomotionInput(Vector3 move, Quaternion? rotation)
+    public void CreateLocomotionInput(Vector3 move)
     {
         _move = move;
-        _targetRotation = rotation;
     }
 }

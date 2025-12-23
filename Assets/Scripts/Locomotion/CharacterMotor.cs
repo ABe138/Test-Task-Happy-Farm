@@ -24,22 +24,17 @@ public class CharacterMotor : MonoBehaviour
     {
         var dt = Time.deltaTime;
 
-        // Input
-        var moveInput = _inputProvider?.Move ?? Vector2.zero;   // x = A/D (west/east), y = W/S (north/south)
-        var sprint = _inputProvider?.Sprint ?? false;
+        var moveInput = _inputProvider?.Move ?? Vector2.zero;
 
-        // Horizontal target velocity (WORLD-space): map input directly to world axes (no transform)
-        var targetSpeed = sprint ? config.sprintSpeed : config.walkSpeed;
-        var inputDirWorld = new Vector3(moveInput.x, 0f, moveInput.y);    // X = west(-)/east(+), Z = south(-)/north(+)
+        var targetSpeed = config.walkSpeed;
+        var inputDirWorld = new Vector3(moveInput.x, 0f, moveInput.y);
         inputDirWorld = Vector3.ClampMagnitude(inputDirWorld, 1f);
         var targetVelXZ = inputDirWorld * targetSpeed;
 
-        // Smooth accel/decel
         var currentVelXZ = new Vector3(_velocity.x, 0f, _velocity.z);
         var accel = (targetVelXZ.magnitude > currentVelXZ.magnitude) ? config.acceleration : config.deceleration;
         var newVelXZ = Vector3.MoveTowards(currentVelXZ, targetVelXZ, accel * dt);
 
-        // Rotation: face movement direction (top-down). Only rotate when horizontal movement magnitude exceeds threshold.
         var moveDirection = new Vector3(newVelXZ.x, 0f, newVelXZ.z);
         var moveSpeed = moveDirection.magnitude;
         if (moveSpeed > config.faceThreshold)
@@ -51,7 +46,6 @@ public class CharacterMotor : MonoBehaviour
             transform.rotation = Quaternion.RotateTowards(transform.rotation, desired, maxDeg);
         }
 
-        // Simple gravity snap to keep grounded behaviour stable
         var grounded = characterController.isGrounded;
         if (grounded && _verticalVel < 0f) _verticalVel = -1f;
         _verticalVel += config.gravity * dt;
@@ -67,6 +61,4 @@ public class CharacterMotor : MonoBehaviour
 
         OnVelocityChanged?.Invoke(_velocity);
     }
-
-    public Vector3 GetVelocity() => _velocity;
 }

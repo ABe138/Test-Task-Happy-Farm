@@ -4,7 +4,6 @@ using UnityEngine;
 public class LocomotionConfig : ScriptableObject
 {
     public float walkSpeed = 4f;
-    public float sprintSpeed = 7f;
     public float acceleration = 30f;
     public float deceleration = 30f;
     public float gravity = -24f;

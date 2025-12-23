@@ -33,13 +33,13 @@ public class MoveState : BaseState
         var dist = dir.magnitude;
         if (dist < StoppingDistance)
         {
-            _npc.CreateLocomotionInput(Vector2.zero, null);
+            _npc.CreateLocomotionInput(Vector2.zero);
             return true;
         }
         else
         {
             var norm = dir.normalized;
-            _npc.CreateLocomotionInput(new Vector2(norm.x, norm.z), Quaternion.LookRotation(new Vector3(norm.x, 0f, norm.z)));
+            _npc.CreateLocomotionInput(new Vector2(norm.x, norm.z));
             return false;
         }
     }
@@ -64,13 +64,13 @@ public class FollowState : BaseState
         var dist = dir.magnitude;
         if (dist < StoppingDistance)
         {
-            _npc.CreateLocomotionInput(Vector2.zero, null);
+            _npc.CreateLocomotionInput(Vector2.zero);
             return true;
         }
         else
         {
             var norm = dir.normalized;
-            _npc.CreateLocomotionInput(new Vector2(norm.x, norm.z), Quaternion.LookRotation(new Vector3(norm.x, 0f, norm.z)));
+            _npc.CreateLocomotionInput(new Vector2(norm.x, norm.z));
             return false;
         }
     }
@@ -96,12 +96,12 @@ public class FollowQueueState : BaseState
             var dist = dir.magnitude;
             if (dist < StoppingDistance)
             {
-                _npc.CreateLocomotionInput(Vector2.zero, null);
+                _npc.CreateLocomotionInput(Vector2.zero);
             }
             else
             {
                 var norm = dir.normalized;
-                _npc.CreateLocomotionInput(new Vector2(norm.x, norm.z), Quaternion.LookRotation(new Vector3(norm.x, 0f, norm.z)));
+                _npc.CreateLocomotionInput(new Vector2(norm.x, norm.z));
             }
             return false;
         }
