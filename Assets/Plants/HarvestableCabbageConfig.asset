@@ -15,3 +15,4 @@ MonoBehaviour:
   Durability: 1
   RegrowDuration: 10
   ProduceSpread: 0
+  Produce: {fileID: 11400000, guid: b8dea003f16570745a6cfe1c6c17f318, type: 2}
