@@ -7,14 +7,15 @@ public class PlayerHarvester : MonoBehaviour
 {
     [SerializeField] private HarvestingConfig _config;
     [SerializeField] private LayerMask _harvestLayer;
+    [SerializeField] private HarvestingSlashEffect _slashEffectPrefab;
 
     public Action OnHarvestSwingTriggered;
 
-    private bool _harvestingActive = false;
     private float _nextSwingTime = 0f;
     private Coroutine _autoHarvestCoroutine;
 
-    private const float CheckInterval = 0.15f;
+    private const float CheckInterval = 0.1f;
+    private const float SlashAnimationDuration = 0.25f;
 
     private void Start()
     {
@@ -31,16 +32,8 @@ public class PlayerHarvester : MonoBehaviour
         while (true)
         {
             bool hasNearby = HasNearbyHarvestable();
-            if (hasNearby && !_harvestingActive)
-            {
-                StartHarvesting();
-            }
-            else if (!hasNearby && _harvestingActive)
-            {
-                StopHarvesting();
-            }
 
-            if (_harvestingActive && Time.time >= _nextSwingTime)
+            if (hasNearby && Time.time >= _nextSwingTime)
             {
                 // Trigger a swing cycle
                 StartCoroutine(PerformSwing());
@@ -58,34 +51,20 @@ public class PlayerHarvester : MonoBehaviour
         return list.Count > 0;
     }
 
-    private void StartHarvesting()
-    {
-        _harvestingActive = true;
-        _nextSwingTime = Time.time;
-    }
-
-    private void StopHarvesting()
-    {
-        _harvestingActive = false;
-    }
-
     private IEnumerator PerformSwing()
     {
-        // Play trigger (animation should also set a hit event ideally, but we use timing here)
         OnHarvestSwingTriggered?.Invoke();
-
-        // Wait until swingTime when hit should occur
         yield return new WaitForSeconds(_config.swingTime);
-
-        // Perform arc harvest at moment of impact
         DoArcHarvest();
-
-        // Optionally wait until animation end — handled by cooldown
     }
 
     private void DoArcHarvest()
     {
         var scythe = DataManager.Instance.EquippedScythe;
+
+        var slashEffect = PoolingManager.Instance.Pool(_slashEffectPrefab, null, transform.position, Quaternion.LookRotation(transform.forward));
+        slashEffect.Animate(scythe.ArcHalfAngle * 2f, scythe.Reach, SlashAnimationDuration);
+
         var list = ObjectsScanner.FindObjectsInArc<IHarvestable>(transform.position, transform.forward, scythe.Reach, scythe.ArcHalfAngle, _harvestLayer);
 
         var harvested = new HashSet<IHarvestable>();
@@ -93,7 +72,7 @@ public class PlayerHarvester : MonoBehaviour
         {
             if (h == null) continue;
             if (harvested.Contains(h)) continue;
-            bool consumed = h.Harvest(transform.position);
+            var consumed = h.Harvest(transform.position);
             if (consumed) harvested.Add(h);
         }
     }

@@ -12,8 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0fea3769bdeb3d45a752cbef0761fa4, type: 3}
   m_Name: PlayerHarvestingConfig
   m_EditorClassIdentifier: 
-  scanRadius: 2
-  arcHalfAngle: 60
-  arcRange: 2
-  swingTime: 0.9
-  swingCooldown: 1.3
+  swingTime: 0.85
+  swingCooldown: 1

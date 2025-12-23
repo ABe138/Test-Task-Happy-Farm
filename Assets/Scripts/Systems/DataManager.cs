@@ -1,5 +1,7 @@
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using UnityEngine;
 
@@ -24,6 +26,8 @@ public class DataManager : MonoBehaviour
     public ScytheUpgradeConfig EquippedScythe => ScytheUpgradeConfigs[Data.ScytheLevel];
     public InventoryUpgradeConfig EquippedBackpack => InventoryUpgradeConfigs[Data.InventoryCapacityLevel];
 
+    readonly string _saveFile = "gamedata.json";
+    private string GetPath(string fileName) => Path.Combine(Application.persistentDataPath, fileName);
 
     public void Awake()
     {
@@ -40,7 +44,7 @@ public class DataManager : MonoBehaviour
     {
         Data = TryLoadGameData() ?? new GameData();
 
-        foreach (var config in CollectableObjectConfigs) 
+        foreach (var config in CollectableObjectConfigs)
         {
             //just to initialize currency icons:
             AddCurrency(config.Id, 0);
@@ -52,12 +56,17 @@ public class DataManager : MonoBehaviour
 
     private GameData TryLoadGameData()
     {
-        return null;
+        var path = GetPath(_saveFile);
+        if (!File.Exists(path)) return null;
+        var json = File.ReadAllText(path);
+        try { return JsonConvert.DeserializeObject<GameData>(json); }
+        catch { return null; }
     }
 
     private void SaveGameData()
     {
-
+        var json = JsonConvert.SerializeObject(Data);
+        File.WriteAllText(GetPath(_saveFile), json);
     }
 
     public void AddItem(string itemId, int amount)
@@ -112,8 +121,8 @@ public class DataManager : MonoBehaviour
     private bool CanAffordPurchase(Dictionary<string, int> price)
     {
         var canAfford = true;
-        foreach (var kvp in price) 
-        { 
+        foreach (var kvp in price)
+        {
             canAfford = canAfford && Data.Currency.ContainsKey(kvp.Key) && Data.Currency[kvp.Key] >= kvp.Value;
         }
         return canAfford;
@@ -121,9 +130,9 @@ public class DataManager : MonoBehaviour
 
     public bool TryWithdrawCurrency(Dictionary<string, int> price)
     {
-        if (CanAffordPurchase(price)) 
+        if (CanAffordPurchase(price))
         {
-            foreach (var kvp in price) 
+            foreach (var kvp in price)
             {
                 if (Data.Currency.ContainsKey(kvp.Key))
                 {
@@ -137,7 +146,7 @@ public class DataManager : MonoBehaviour
         return false;
     }
 
-    public void SetInventoryLevel(int level) 
+    public void SetInventoryLevel(int level)
     {
         Data.InventoryCapacityLevel = level;
         OnUpgradeBackpack?.Invoke();

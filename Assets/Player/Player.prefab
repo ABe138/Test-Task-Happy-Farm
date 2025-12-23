@@ -140,6 +140,7 @@ MonoBehaviour:
   _harvestLayer:
     serializedVersion: 2
     m_Bits: 64
+  _slashEffectPrefab: {fileID: 8012643501174200926, guid: e02a3e890315e5b49afae6e74df529dc, type: 3}
 --- !u!114 &886005224037065573
 MonoBehaviour:
   m_ObjectHideFlags: 0

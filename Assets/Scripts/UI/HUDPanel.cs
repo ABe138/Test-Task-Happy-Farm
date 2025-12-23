@@ -31,6 +31,8 @@ public class HUDPanel : MonoBehaviour
     {
         var dataManager = DataManager.Instance;
         var inventory = dataManager.Data.Inventory;
+
+        _inventoryView.ClearViews();
         foreach (var item in inventory)
         {
             _inventoryView.UpdateItemQuantity(item.Key, item.Value);
