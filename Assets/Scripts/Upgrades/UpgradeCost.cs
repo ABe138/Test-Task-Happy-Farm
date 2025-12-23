@@ -1,6 +1,6 @@
 ﻿[System.Serializable]
 public class UpgradeCost 
 {
-    public CollectableObjectConfig Currency;
+    public CollectableConfig Currency;
     public int Cost;
 }

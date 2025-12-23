@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "GameConfig/CollectableObject")]
-public class CollectableObjectConfig : ScriptableObject
+[CreateAssetMenu(menuName = "GameConfig/Collectable")]
+public class CollectableConfig : ScriptableObject
 {
     public string Id;
     public string Name;

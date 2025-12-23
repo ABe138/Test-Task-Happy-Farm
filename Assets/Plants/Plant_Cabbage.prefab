@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c75b2db17a2179249a6a7021a39bf77a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _config: {fileID: 11400000, guid: dad7b18c2a95cd24a829685a15d56abc, type: 2}
   _durability: 1
   _regrowDuration: 10
   _produceSpread: 0

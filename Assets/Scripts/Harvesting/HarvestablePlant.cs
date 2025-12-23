@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class HarvestablePlant : MonoBehaviour, IHarvestable
 {
-    [SerializeField] private int _durability = 1;
-    [SerializeField] private float _regrowDuration = 1;
-    [SerializeField] private float _produceSpread = 1;
+    [SerializeField] private HarvestableConfig _config;
     
     [SerializeField] private Collider _hitCollider;
     [SerializeField] private Transform _scaleAnchor;
@@ -14,13 +12,11 @@ public class HarvestablePlant : MonoBehaviour, IHarvestable
     [SerializeField] private GameObject _hitEffect;
     [SerializeField] private GameObject _rebirthEffect;
 
-    [SerializeField] private string _collectableItemId;
-
     private int _durabilityCurrent;
 
     private void Awake()
     {
-        _durabilityCurrent = _durability;
+        _durabilityCurrent = _config.Durability;
     }
 
     public bool Harvest(Vector3 hitFrom)
@@ -38,11 +34,9 @@ public class HarvestablePlant : MonoBehaviour, IHarvestable
         _hitEffect.SetActive(false);
         _hitEffect.SetActive(true);
 
-        var config = DataManager.Instance.CollectableObjectConfigs.FirstOrDefault(obj => obj.Id == _collectableItemId);
-        var collectablePrefab = config.CollectableItemPrefab;
-        var item = PoolingManager.Instance.Pool(collectablePrefab, null, Vector3.zero, Quaternion.identity);
+        var item = PoolingManager.Instance.Pool(_config.Produce.CollectableItemPrefab, null, Vector3.zero, Quaternion.identity);
         var randomRange = Random.insideUnitCircle;
-        item.Initialize(transform.position + new Vector3(randomRange.x, 0, randomRange.y) * _produceSpread, _collectableItemId);
+        item.Initialize(transform.position + new Vector3(randomRange.x, 0, randomRange.y) * _config.ProduceSpread, _config.Produce.Id);
     }
 
     protected virtual void OnDepleted()
@@ -97,15 +91,15 @@ public class HarvestablePlant : MonoBehaviour, IHarvestable
     private IEnumerator Regrow()
     {
         var currentTime = 0f;
-        while (currentTime < _regrowDuration)
+        while (currentTime < _config.RegrowDuration)
         {
             currentTime += Time.deltaTime;
-            _scaleAnchor.localScale = Vector3.one * Mathf.Lerp(0.01f, 1f, currentTime / _regrowDuration);
+            _scaleAnchor.localScale = Vector3.one * Mathf.Lerp(0.01f, 1f, currentTime / _config.RegrowDuration);
             yield return null;
         }
         _scaleAnchor.localScale = Vector3.one;
         _hitCollider.enabled = true;
-        _durabilityCurrent = _durability;
+        _durabilityCurrent = _config.Durability;
 
         _rebirthEffect.SetActive(false);
         _rebirthEffect.SetActive(true);

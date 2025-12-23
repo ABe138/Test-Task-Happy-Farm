@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be7b03316166f59419d4ae22ab054569, type: 3}
+  m_Script: {fileID: 11500000, guid: c380b3584891fe84eb6bae953bf2a411, type: 3}
   m_Name: CollectableTomatoConfig
   m_EditorClassIdentifier: 
   Id: 0

@@ -10,7 +10,7 @@ public class DataManager : MonoBehaviour
     public static DataManager Instance { get; private set; }
     [field: SerializeField] public List<InventoryUpgradeConfig> InventoryUpgradeConfigs { get; private set; }
     [field: SerializeField] public List<ScytheUpgradeConfig> ScytheUpgradeConfigs { get; private set; }
-    [field: SerializeField] public List<CollectableObjectConfig> CollectableObjectConfigs { get; private set; }
+    [field: SerializeField] public List<CollectableConfig> CollectableObjectConfigs { get; private set; }
 
     public GameData Data { get; private set; }
 

@@ -48,8 +48,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c75b2db17a2179249a6a7021a39bf77a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _config: {fileID: 11400000, guid: cc78b98a8defd784da1f81c1bff17ec0, type: 2}
   _durability: 5
   _regrowDuration: 5
+  _produceSpread: 1
   _hitCollider: {fileID: 69365603000743253}
   _scaleAnchor: {fileID: 5146376790522144798}
   _tiltAnchor: {fileID: 3725756845258470561}

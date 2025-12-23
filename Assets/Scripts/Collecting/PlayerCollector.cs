@@ -11,8 +11,6 @@ public class PlayerCollector : MonoBehaviour, ICollector
 
     private const float CheckInterval = 0.15f;
 
-    public Action<bool> OnGatheringChanged;
-
     public Transform CollectorTransform => transform;
 
     private void OnEnable()
@@ -23,7 +21,6 @@ public class PlayerCollector : MonoBehaviour, ICollector
     private void OnDisable()
     {
         if (_autoCollectCoroutine != null) StopCoroutine(_autoCollectCoroutine);
-        OnGatheringChanged?.Invoke(false);
     }
 
     private IEnumerator AutoCollectLoop()
@@ -35,7 +32,6 @@ public class PlayerCollector : MonoBehaviour, ICollector
             {
                 collectable.Collect(this);
             }
-            //OnGatheringChanged?.Invoke(collectables.Count > 0);
             yield return new WaitForSeconds(CheckInterval);
         }
     }
