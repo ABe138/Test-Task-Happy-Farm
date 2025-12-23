@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac3a05b46bc5fc24abe2f1b48ad382c8, type: 3}
+  m_Name: Inventory_1
+  m_EditorClassIdentifier: 
+  Name: Waterer
+  UpgradeCost:
+  - Currency: {fileID: 11400000, guid: b8dea003f16570745a6cfe1c6c17f318, type: 2}
+    Cost: 25
+  - Currency: {fileID: 11400000, guid: b57cd73303d77484ba6bf1722fae950b, type: 2}
+    Cost: 50
+  Capacity: 150
+  BackpackPrefab: {fileID: 7899888614773879587, guid: 451e1b8ac7844f145ab46c89de82fbeb, type: 3}
+  BackpackIcon: {fileID: 21300000, guid: 97509f000137e8847b577fbf810ee582, type: 3}
