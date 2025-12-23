@@ -25,7 +25,7 @@ public class PlayerUpgradesGraphic : MonoBehaviour
         if (_currentBackpack != null) Destroy(_currentBackpack);
 
         var config = dataManager.InventoryUpgradeConfigs[currenLevel];
-        _currentBackpack = Instantiate(config.BackpackPrefab, _backpackAnchor);
+        _currentBackpack = Instantiate(config.Prefab, _backpackAnchor);
         _currentBackpack.transform.localPosition = Vector3.zero;
         _currentBackpack.transform.localRotation = Quaternion.identity;
     }
@@ -38,7 +38,7 @@ public class PlayerUpgradesGraphic : MonoBehaviour
         if (_currentScythe != null) Destroy(_currentScythe);
 
         var config = dataManager.ScytheUpgradeConfigs[currenLevel];
-        _currentScythe = Instantiate(config.ScythePrefab, _scytheAnchor);
+        _currentScythe = Instantiate(config.Prefab, _scytheAnchor);
         _currentScythe.transform.localPosition = Vector3.zero;
         _currentScythe.transform.localRotation = Quaternion.identity;
     }

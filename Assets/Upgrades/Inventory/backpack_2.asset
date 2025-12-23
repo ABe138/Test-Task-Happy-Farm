@@ -10,12 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac3a05b46bc5fc24abe2f1b48ad382c8, type: 3}
-  m_Name: Inventory_0
+  m_Name: backpack_2
   m_EditorClassIdentifier: 
-  Name: Wooden Backpack
+  Name: Mobile Farm
   UpgradeCost:
+  - Currency: {fileID: 11400000, guid: b8dea003f16570745a6cfe1c6c17f318, type: 2}
+    Cost: 100
   - Currency: {fileID: 11400000, guid: b57cd73303d77484ba6bf1722fae950b, type: 2}
-    Cost: 10
-  Capacity: 50
-  BackpackPrefab: {fileID: 7899888614773879587, guid: f935394ee96bd36429eebf973ed999e1, type: 3}
-  BackpackIcon: {fileID: 21300000, guid: 6584abbb338b7884aba61124dea9ccf4, type: 3}
+    Cost: 500
+  Prefab: {fileID: 7899888614773879587, guid: 1cd0719edcac84044977fa65b7047fc3, type: 3}
+  Icon: {fileID: 21300000, guid: f60a5c0d56569934eb7c269e82d8c5b1, type: 3}
+  Capacity: 300

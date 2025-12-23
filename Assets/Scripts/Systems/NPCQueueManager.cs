@@ -23,6 +23,7 @@ public class NPCQueueManager : MonoBehaviour
     private const int SpawnLimit = 5;
 
     public PurchaseOrder PendingPurchaseOrder { get; private set; }
+    public Action PendingRequestUpdated;
 
     private void Awake()
     {
@@ -90,12 +91,6 @@ public class NPCQueueManager : MonoBehaviour
         if (_npcsInQueue.Contains(npc)) _npcsInQueue.Remove(npc);
     }
 
-    public void SetPendingPurchaseOrder(PurchaseOrder purchaseOrder) 
-    {
-        //show speech bubble
-        PendingPurchaseOrder = purchaseOrder;
-    }
-
     public bool TryCompletePendingOrder() 
     {
         if (PendingPurchaseOrder != null && !PendingPurchaseOrder.Satisfied) 
@@ -105,16 +100,25 @@ public class NPCQueueManager : MonoBehaviour
             {
                 dataManager.AddCurrency(PendingPurchaseOrder.ItemId, dataManager.GetItemValue(PendingPurchaseOrder.ItemId) * PendingPurchaseOrder.Quantity);
                 PendingPurchaseOrder.MarkAsComplete();
+                PendingRequestUpdated?.Invoke();
                 return true;
             }
         }
         return false;
     }
 
+    public void SetPendingPurchaseOrder(PurchaseOrder purchaseOrder)
+    {
+        //show speech bubble
+        PendingPurchaseOrder = purchaseOrder;
+        PendingRequestUpdated?.Invoke();
+    }
+
     public void DiscardPendingOrder() 
     {
         //hide speech bubble
         PendingPurchaseOrder = null;
+        PendingRequestUpdated?.Invoke();
     }
 }
 

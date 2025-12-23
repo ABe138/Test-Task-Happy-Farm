@@ -31,7 +31,7 @@ public class PoolingManager : MonoBehaviour
         int id = prefab.gameObject.GetInstanceID();
         if (!_pools.TryGetValue(id, out var pool))
         {
-            pool = CreatePool(prefab, 1, true);
+            pool = CreatePool(prefab, 0, true);
             _pools[id] = pool;
         }
 
@@ -42,7 +42,7 @@ public class PoolingManager : MonoBehaviour
         }
         else if (pool.Expandable)
         {
-            mb = Instantiate(pool.Original as T, position: position, rotation: rotation);
+            mb = Instantiate(pool.Original as T, position: position, rotation: rotation, parent: parentTo);
             MarkAsPooled(mb.gameObject, id);
         }
         else
@@ -51,8 +51,8 @@ public class PoolingManager : MonoBehaviour
         }
 
         mb.transform.SetParent(parentTo);
-        mb.transform.position = position;
-        mb.transform.rotation = rotation;
+        mb.transform.localPosition = position;
+        mb.transform.localRotation = rotation;
         mb.gameObject.SetActive(true);
         return mb as T;
     }
