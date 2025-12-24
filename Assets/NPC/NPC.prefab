@@ -74,7 +74,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73971ae5cc18f7d48ba52a5949acbac4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  config: {fileID: 11400000, guid: 2e3672259da4a314db8c8677df398126, type: 2}
+  config: {fileID: 11400000, guid: ae9d6e903aa3b9e458f33ed65f4817c2, type: 2}
   characterController: {fileID: 74820794515633925}
 --- !u!114 &3269807611357788292
 MonoBehaviour:

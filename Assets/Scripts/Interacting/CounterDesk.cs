@@ -20,11 +20,13 @@ public class CounterDesk : MonoBehaviour, IInteractable
         var request = NPCQueueManager.Instance.PendingPurchaseOrder;
         if (request != null && !request.Satisfied)
         {
+            _pendingPurchaseView.gameObject.SetActive(true);
             _pendingPurchaseView.UpdateItemQuantity(request.ItemId, request.Quantity);
             _noRequestView.gameObject.SetActive(false);
         }
         else
         {
+            _pendingPurchaseView.gameObject.SetActive(false);
             _noRequestView.gameObject.SetActive(true);
         }
     }

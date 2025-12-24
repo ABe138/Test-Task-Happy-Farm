@@ -184,7 +184,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _harvester: {fileID: 7298427393699508478}
-  _collector: {fileID: 886005224037065573}
   _animator: {fileID: 7879457481479202589}
 --- !u!114 &8318056272630871900
 MonoBehaviour:
