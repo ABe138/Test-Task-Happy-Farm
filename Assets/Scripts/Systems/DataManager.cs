@@ -59,8 +59,13 @@ public class DataManager : MonoBehaviour
         var path = GetPath(_saveFile);
         if (!File.Exists(path)) return null;
         var json = File.ReadAllText(path);
-        try { return JsonConvert.DeserializeObject<GameData>(json); }
-        catch { return null; }
+        try 
+        { 
+            return JsonConvert.DeserializeObject<GameData>(json); }
+        catch 
+        { 
+            return null; 
+        }
     }
 
     private void SaveGameData()
