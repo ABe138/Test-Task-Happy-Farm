@@ -9,6 +9,9 @@ public class NPCQueueManager : MonoBehaviour
     public static NPCQueueManager Instance { get; private set; }
 
     [SerializeField] private NPCBrain _npcPrefab;
+
+    [SerializeField] private List<PurchaseRequestConfig> _purchaseRequestConfigs;
+
     [SerializeField] private Transform _spawnPoint;
     [SerializeField] private Transform _purchasePoint;
     [SerializeField] private Transform _despawnPoint;
@@ -60,9 +63,11 @@ public class NPCQueueManager : MonoBehaviour
                 var newNPC = PoolingManager.Instance.Pool(_npcPrefab, null, _spawnPoint.position + Vector3.up * 0.05f, Quaternion.identity);
                 _npcsInQueue.Add(newNPC);
 
+                var useRequestConfig = _purchaseRequestConfigs[UnityEngine.Random.Range(0, _purchaseRequestConfigs.Count)];
+
                 newNPC.AddStateToQueue(new FollowQueueState(newNPC));
                 newNPC.AddStateToQueue(new MoveState(newNPC, _purchasePoint.position));
-                newNPC.AddStateToQueue(new MakePurchaseState(newNPC, new (UnityEngine.Random.Range(0, 2).ToString(), UnityEngine.Random.Range(1, 10))));
+                newNPC.AddStateToQueue(new MakePurchaseState(newNPC, (useRequestConfig.ItemId, useRequestConfig.RollRequestValue)));
                 newNPC.AddStateToQueue(new MoveState(newNPC, _despawnPoint.position));
                 newNPC.AddStateToQueue(new Despawn(newNPC));
 

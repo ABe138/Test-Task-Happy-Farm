@@ -25804,6 +25804,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _npcPrefab: {fileID: 4182926266614634535, guid: 44aa403632bcf2645a37f22b8399ebe2, type: 3}
+  _purchaseRequestConfigs:
+  - {fileID: 11400000, guid: 9859d2c1b88fca840890f5a51f5009af, type: 2}
+  - {fileID: 11400000, guid: 3e55b01c45a82b0438d376917465a16d, type: 2}
   _spawnPoint: {fileID: 1273744515}
   _purchasePoint: {fileID: 2113264485}
   _despawnPoint: {fileID: 936983078}
