@@ -6,18 +6,18 @@ public class PlayerInteractor : MonoBehaviour
     [SerializeField] private InteractingConfig _config;
     [SerializeField] private LayerMask _interactLayer;
 
-    private Coroutine _autoHarvestCoroutine;
+    private Coroutine _autoInteractCoroutine;
 
     private const float CheckInterval = 0.15f;
 
     private void OnEnable()
     {
-        _autoHarvestCoroutine = StartCoroutine(AutoInteractLoop());
+        _autoInteractCoroutine = StartCoroutine(AutoInteractLoop());
     }
 
     private void OnDisable()
     {
-        if (_autoHarvestCoroutine != null) StopCoroutine(_autoHarvestCoroutine);
+        if (_autoInteractCoroutine != null) StopCoroutine(_autoInteractCoroutine);
     }
 
     private IEnumerator AutoInteractLoop()
