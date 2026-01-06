@@ -3,14 +3,9 @@ using UnityEngine.InputSystem;
 
 public class PlayerInputAdapter : MonoBehaviour, ILocomotionInput
 {
-    Vector2 move;
-    bool sprint;
-    Quaternion? targetRot;
+    public Vector2 Move => _move;
 
-    public Vector2 Move => move;
-    public Quaternion? TargetRotation => targetRot;
-    public bool Sprint => sprint;
+    private Vector2 _move;
 
-    void OnMove(InputValue v) => move = v.Get<Vector2>();
-    void OnSprint(InputValue v) => sprint = v.isPressed;
+    void OnMove(InputValue v) => _move = v.Get<Vector2>();
 }

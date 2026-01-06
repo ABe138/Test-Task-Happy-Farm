@@ -118,8 +118,3 @@ public class PoolingManager : MonoBehaviour
         _pools.Clear();
     }
 }
-
-public class PooledObjectTag : MonoBehaviour
-{
-    public int prefabId;
-}

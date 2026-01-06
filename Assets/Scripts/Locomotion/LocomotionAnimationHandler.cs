@@ -19,7 +19,7 @@ public class LocomotionAnimationHandler : MonoBehaviour
 
     void HandleVelocity(Vector3 velocity)
     {
-        float speed = new Vector3(velocity.x, 0f, velocity.z).magnitude;
+        var speed = new Vector3(velocity.x, 0f, velocity.z).magnitude;
         animator?.SetFloat("Speed", speed);
     }
 

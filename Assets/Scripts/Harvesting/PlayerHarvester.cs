@@ -31,11 +31,10 @@ public class PlayerHarvester : MonoBehaviour
     {
         while (true)
         {
-            bool hasNearby = HasNearbyHarvestable();
+            var hasNearby = HasNearbyHarvestable();
 
             if (hasNearby && Time.time >= _nextSwingTime)
             {
-                // Trigger a swing cycle
                 StartCoroutine(PerformSwing());
                 _nextSwingTime = Time.time + _config.swingCooldown;
             }
@@ -77,7 +76,6 @@ public class PlayerHarvester : MonoBehaviour
         }
     }
 
-    // Optional public hook to force a manual swing (e.g., player pressed button)
     public void ForceSwing()
     {
         if (Time.time < _nextSwingTime) return;
